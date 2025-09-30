@@ -1,4 +1,4 @@
-module github.com/stablelabs/blocktime-calculator
+module github.com/qj0r9j0vc2/blocktime-calculator
 
 go 1.23.0
 

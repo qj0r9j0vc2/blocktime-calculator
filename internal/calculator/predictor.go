@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/stablelabs/blocktime-calculator/internal/client"
-	"github.com/stablelabs/blocktime-calculator/pkg/types"
+	"github.com/qj0r9j0vc2/blocktime-calculator/internal/client"
+	"github.com/qj0r9j0vc2/blocktime-calculator/pkg/types"
 )
 
 // BlockPredictor predicts when a target block will be created
@@ -159,19 +159,19 @@ func (p *BlockPredictor) PredictNextBlocks(ctx context.Context, count int) (*Mul
 
 // BlockPrediction represents a prediction for when a block will be created
 type BlockPrediction struct {
-	TargetHeight    int64                  `json:"target_height"`
-	CurrentHeight   int64                  `json:"current_height"`
-	BlocksLeft      int64                  `json:"blocks_left"`
-	CurrentTime     time.Time              `json:"current_time"`
-	CurrentBlockAge time.Duration          `json:"current_block_age"`
-	EstimatedTime   time.Time              `json:"estimated_time"`
-	OptimisticTime  time.Time              `json:"optimistic_time"`
-	PessimisticTime time.Time              `json:"pessimistic_time"`
-	Duration        DurationEstimate       `json:"duration"`
-	BlockTimeStats  *types.BlockTimeStats  `json:"block_time_stats,omitempty"`
-	ConfidenceLevel float64                `json:"confidence_level"`
-	IsComplete      bool                   `json:"is_complete"`
-	ActualTime      *time.Time             `json:"actual_time,omitempty"`
+	TargetHeight    int64                 `json:"target_height"`
+	CurrentHeight   int64                 `json:"current_height"`
+	BlocksLeft      int64                 `json:"blocks_left"`
+	CurrentTime     time.Time             `json:"current_time"`
+	CurrentBlockAge time.Duration         `json:"current_block_age"`
+	EstimatedTime   time.Time             `json:"estimated_time"`
+	OptimisticTime  time.Time             `json:"optimistic_time"`
+	PessimisticTime time.Time             `json:"pessimistic_time"`
+	Duration        DurationEstimate      `json:"duration"`
+	BlockTimeStats  *types.BlockTimeStats `json:"block_time_stats,omitempty"`
+	ConfidenceLevel float64               `json:"confidence_level"`
+	IsComplete      bool                  `json:"is_complete"`
+	ActualTime      *time.Time            `json:"actual_time,omitempty"`
 }
 
 // DurationEstimate represents estimated duration ranges
@@ -191,9 +191,9 @@ type BlockMilestone struct {
 
 // MultiBlockPrediction represents predictions for multiple blocks
 type MultiBlockPrediction struct {
-	CurrentHeight   int64                  `json:"current_height"`
-	CurrentTime     time.Time              `json:"current_time"`
-	CurrentBlockAge time.Duration          `json:"current_block_age"`
-	Predictions     []BlockMilestone       `json:"predictions"`
-	BlockTimeStats  *types.BlockTimeStats  `json:"block_time_stats,omitempty"`
+	CurrentHeight   int64                 `json:"current_height"`
+	CurrentTime     time.Time             `json:"current_time"`
+	CurrentBlockAge time.Duration         `json:"current_block_age"`
+	Predictions     []BlockMilestone      `json:"predictions"`
+	BlockTimeStats  *types.BlockTimeStats `json:"block_time_stats,omitempty"`
 }

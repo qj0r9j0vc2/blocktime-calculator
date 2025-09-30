@@ -8,20 +8,20 @@ import (
 	"strings"
 	"time"
 
+	"github.com/qj0r9j0vc2/blocktime-calculator/internal/calculator"
+	"github.com/qj0r9j0vc2/blocktime-calculator/internal/client"
+	"github.com/qj0r9j0vc2/blocktime-calculator/internal/config"
+	"github.com/qj0r9j0vc2/blocktime-calculator/pkg/types"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/stablelabs/blocktime-calculator/internal/calculator"
-	"github.com/stablelabs/blocktime-calculator/internal/client"
-	"github.com/stablelabs/blocktime-calculator/internal/config"
-	"github.com/stablelabs/blocktime-calculator/pkg/types"
 )
 
 var (
 	cfgFile string
 	rootCmd = &cobra.Command{
 		Use:   "blocktime-calculator",
-		Short: "Stable blockchain block time calculator",
-		Long: `A sophisticated block time calculator for Stable blockchain
+		Short: "Cosmos SDK blockchain block time calculator",
+		Long: `A sophisticated block time calculator for Cosmos SDK blockchain
 that analyzes block production patterns and provides statistical insights
 with outlier removal and confidence-based range estimation.`,
 		Version: "1.0.0",
@@ -63,7 +63,7 @@ func init() {
 	// Global flags
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default: ./config.yaml)")
 	rootCmd.PersistentFlags().String("rpc", "", "RPC endpoint URL")
-	rootCmd.PersistentFlags().String("chain-id", "stable", "Chain ID")
+	rootCmd.PersistentFlags().String("chain-id", "cosmoshub-4", "Chain ID")
 	rootCmd.PersistentFlags().Duration("timeout", 30*time.Second, "Request timeout")
 
 	// Calculate command flags
@@ -133,7 +133,7 @@ func runCalculate(cmd *cobra.Command, args []string) error {
 	}
 
 	// Create client
-	blockClient, err := client.NewStableClient(&cfg.Chain)
+	blockClient, err := client.NewCosmosSDKClient(&cfg.Chain)
 	if err != nil {
 		return fmt.Errorf("failed to create client: %w", err)
 	}
@@ -193,7 +193,7 @@ func runAnalyze(cmd *cobra.Command, args []string) error {
 	}
 
 	// Create client
-	blockClient, err := client.NewStableClient(&cfg.Chain)
+	blockClient, err := client.NewCosmosSDKClient(&cfg.Chain)
 	if err != nil {
 		return fmt.Errorf("failed to create client: %w", err)
 	}
@@ -244,7 +244,7 @@ func runPredict(cmd *cobra.Command, args []string) error {
 	}
 
 	// Create client
-	blockClient, err := client.NewStableClient(&cfg.Chain)
+	blockClient, err := client.NewCosmosSDKClient(&cfg.Chain)
 	if err != nil {
 		return fmt.Errorf("failed to create client: %w", err)
 	}

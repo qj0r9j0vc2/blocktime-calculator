@@ -1,6 +1,6 @@
-# Stable Blockchain Block Time Calculator
+# Blockchain Block Time Calculator
 
-A sophisticated block time calculator for Stable blockchain that analyzes block production patterns and provides statistical insights with outlier removal and confidence-based range estimation.
+A sophisticated block time calculator for Cosmos SDK blockchain that analyzes block production patterns and provides statistical insights with outlier removal and confidence-based range estimation.
 
 ## Features
 
@@ -17,7 +17,7 @@ A sophisticated block time calculator for Stable blockchain that analyzes block 
 ## Installation
 
 ```bash
-go get github.com/stablelabs/blocktime-calculator
+go get github.com/qj0r9j0vc2/blocktime-calculator
 go build -o blocktime-calculator cmd/main.go
 ```
 
@@ -84,7 +84,7 @@ Use with configuration file:
 ### Global Flags
 - `--config`: Path to configuration file
 - `--rpc`: RPC endpoint URL
-- `--chain-id`: Chain ID (default: "stable")
+- `--chain-id`: Chain ID (default: "cosmoshub-4")
 - `--timeout`: Request timeout (default: 30s)
 
 ### Calculate Command Flags
@@ -116,7 +116,7 @@ Use with configuration file:
 chain:
   rpc_endpoint: "http://localhost:26657"
   grpc_endpoint: "localhost:9090"
-  chain_id: "stable"
+  chain_id: "cosmoshub-4"
   timeout: 30s
   max_retries: 3
   retry_delay: 1s

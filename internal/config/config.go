@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/qj0r9j0vc2/blocktime-calculator/pkg/types"
 	"github.com/spf13/viper"
-	"github.com/stablelabs/blocktime-calculator/pkg/types"
 )
 
 // Config represents the application configuration
@@ -17,8 +17,8 @@ type Config struct {
 
 // OutputConfig represents output formatting configuration
 type OutputConfig struct {
-	Format      string `json:"format" mapstructure:"format"`           // json, text, table
-	Verbose     bool   `json:"verbose" mapstructure:"verbose"`          // Show extended statistics
+	Format      string `json:"format" mapstructure:"format"`             // json, text, table
+	Verbose     bool   `json:"verbose" mapstructure:"verbose"`           // Show extended statistics
 	PrettyPrint bool   `json:"pretty_print" mapstructure:"pretty_print"` // Pretty print JSON
 	SaveToFile  string `json:"save_to_file" mapstructure:"save_to_file"` // Save output to file
 }
@@ -29,7 +29,7 @@ func DefaultConfig() *Config {
 		Chain: types.ChainConfig{
 			RPCEndpoint:  "http://localhost:26657",
 			GRPCEndpoint: "localhost:9090",
-			ChainID:      "stable",
+			ChainID:      "cosmoshub-4",
 			Timeout:      30 * time.Second,
 			MaxRetries:   3,
 			RetryDelay:   time.Second,

@@ -7,7 +7,7 @@ import (
 
 	rpchttp "github.com/cometbft/cometbft/rpc/client/http"
 	tmtypes "github.com/cometbft/cometbft/types"
-	"github.com/stablelabs/blocktime-calculator/pkg/types"
+	"github.com/qj0r9j0vc2/blocktime-calculator/pkg/types"
 )
 
 // BlockchainClient interface for blockchain interactions
@@ -18,14 +18,14 @@ type BlockchainClient interface {
 	Close() error
 }
 
-// StableClient implements BlockchainClient for Stable blockchain
-type StableClient struct {
+// CosmosSDKClient implements BlockchainClient for Cosmos SDK blockchain
+type CosmosSDKClient struct {
 	config *types.ChainConfig
 	client *rpchttp.HTTP
 }
 
-// NewStableClient creates a new Stable blockchain client
-func NewStableClient(config *types.ChainConfig) (*StableClient, error) {
+// NewCosmosSDKClient creates a new Cosmos SDK blockchain client
+func NewCosmosSDKClient(config *types.ChainConfig) (*CosmosSDKClient, error) {
 	if config.RPCEndpoint == "" {
 		return nil, fmt.Errorf("RPC endpoint is required")
 	}
@@ -48,15 +48,14 @@ func NewStableClient(config *types.ChainConfig) (*StableClient, error) {
 		return nil, fmt.Errorf("failed to create RPC client: %w", err)
 	}
 
-	return &StableClient{
+	return &CosmosSDKClient{
 		config: config,
 		client: client,
 	}, nil
 }
 
-
 // GetLatestBlockHeight gets the latest block height
-func (c *StableClient) GetLatestBlockHeight(ctx context.Context) (int64, error) {
+func (c *CosmosSDKClient) GetLatestBlockHeight(ctx context.Context) (int64, error) {
 	status, err := c.client.Status(ctx)
 	if err != nil {
 		return 0, fmt.Errorf("failed to get status: %w", err)
@@ -66,7 +65,7 @@ func (c *StableClient) GetLatestBlockHeight(ctx context.Context) (int64, error) 
 }
 
 // GetBlockByHeight gets block information by height
-func (c *StableClient) GetBlockByHeight(ctx context.Context, height int64) (*types.BlockInfo, error) {
+func (c *CosmosSDKClient) GetBlockByHeight(ctx context.Context, height int64) (*types.BlockInfo, error) {
 	blockResult, err := c.client.Block(ctx, &height)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get block at height %d: %w", height, err)
@@ -86,7 +85,7 @@ func (c *StableClient) GetBlockByHeight(ctx context.Context, height int64) (*typ
 }
 
 // GetBlockRange gets a range of blocks
-func (c *StableClient) GetBlockRange(ctx context.Context, startHeight, endHeight int64) ([]*types.BlockInfo, error) {
+func (c *CosmosSDKClient) GetBlockRange(ctx context.Context, startHeight, endHeight int64) ([]*types.BlockInfo, error) {
 	if startHeight > endHeight {
 		return nil, fmt.Errorf("invalid range: start height %d > end height %d", startHeight, endHeight)
 	}
@@ -180,7 +179,7 @@ func (c *StableClient) GetBlockRange(ctx context.Context, startHeight, endHeight
 }
 
 // Close closes the client
-func (c *StableClient) Close() error {
+func (c *CosmosSDKClient) Close() error {
 	if c.client != nil {
 		return c.client.Stop()
 	}

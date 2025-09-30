@@ -6,8 +6,8 @@ import (
 	"math"
 	"sort"
 
-	"github.com/stablelabs/blocktime-calculator/internal/client"
-	"github.com/stablelabs/blocktime-calculator/pkg/types"
+	"github.com/qj0r9j0vc2/blocktime-calculator/internal/client"
+	"github.com/qj0r9j0vc2/blocktime-calculator/pkg/types"
 )
 
 // BlockTimeCalculator calculates block time statistics
